@@ -168,3 +168,8 @@ void AABCharacterBase::ComboCheck()
 	}
 }
 
+void AABCharacterBase::AttackHitCheck()
+{
+	// trace 채널을 이용해서 물체가 서로 충돌되는 지를 검사하는 로직
+}
+

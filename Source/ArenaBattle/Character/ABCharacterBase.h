@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "Interface/ABAnimationAttackInterface.h"
 #include "ABCharacterBase.generated.h"
 
 UENUM()
@@ -14,7 +15,7 @@ enum class ECharacterControlType : uint8
 };
 
 UCLASS()
-class ARENABATTLE_API AABCharacterBase : public ACharacter
+class ARENABATTLE_API AABCharacterBase : public ACharacter, public IABAnimationAttackInterface
 {
 	GENERATED_BODY()
 
@@ -51,4 +52,10 @@ protected:
 	// 월드에서 제공하는 기능 -> 특정시간에 함수 호출 가능
 	FTimerHandle ComboTimerHandle;
 	bool HasNextComboCommand = false;
+
+
+	// Attack Hit Check
+
+protected:
+	virtual void AttackHitCheck() override;
 };
