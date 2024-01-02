@@ -5,3 +5,4 @@ Binaries/*
 .vs/*
 *.vsconfig
 *.sln
+*.idea/*

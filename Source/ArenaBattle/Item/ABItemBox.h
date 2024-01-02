@@ -14,6 +14,11 @@ class ARENABATTLE_API AABItemBox : public AActor
 public:	
 	AABItemBox();
 
+	FORCEINLINE class UBoxComponent* GetTrigger() { return Trigger; }
+
+protected:
+	virtual void PostInitializeComponents() override;
+
 protected:
 	UPROPERTY(VisibleAnywhere, Category = Box)
 	TObjectPtr<class UBoxComponent> Trigger;

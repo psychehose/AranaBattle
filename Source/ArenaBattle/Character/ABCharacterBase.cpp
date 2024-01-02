@@ -18,7 +18,7 @@
 AABCharacterBase::AABCharacterBase()
 {
 	// Pawn
-	// ·ÎÅ×ÀÌ¼Ç °ü·Ã
+	// ë¡œí…Œì´ì…˜ ê´€ë ¨
 
 	bUseControllerRotationPitch = false;
 	bUseControllerRotationYaw = false;
@@ -58,7 +58,7 @@ AABCharacterBase::AABCharacterBase()
 		GetMesh()->SetAnimInstanceClass(AnimInstanceClassRef.Class);
 	}
 
-	// Map(Enum, Data) °ª »ı¼º
+	// Map(Enum, Data) ê°’ ìƒì„±
 
 	static ConstructorHelpers::FObjectFinder<UABCharacterControlData> ShoulderDataRef(TEXT("/Script/ArenaBattle.ABCharacterControlData'/Game/ArenaBattle/CharacterControlData/ABC_Shoulder.ABC_Shoulder'"));
 	if (ShoulderDataRef.Object)
@@ -132,10 +132,10 @@ void AABCharacterBase::PostInitializeComponents()
 
 void AABCharacterBase::SetCharacterControlData(const UABCharacterControlData* CharacterControlData)
 {
-	// Pawn ¼Ó¼º
+	// Pawn ì†ì„±
 	bUseControllerRotationYaw = CharacterControlData->bUseControllerRotationYaw;
 
-	// Character Movement ¼Ó¼º
+	// Character Movement ì†ì„±
 	GetCharacterMovement()->bOrientRotationToMovement = CharacterControlData->bOrientRotationToMovement;
 	GetCharacterMovement()->bUseControllerDesiredRotation = CharacterControlData->bUseControllerDesiredRotation;
 	GetCharacterMovement()->RotationRate = CharacterControlData->RotationRate;
@@ -204,7 +204,7 @@ void AABCharacterBase::SetComboCheckTimer()
 
 	if(ComboEffectiveTime > 0.0f)
 	{ 
-		// false·Î ÁöÁ¤ÇØ¼­ µü ÇÑ¹ø¸¸
+		// falseë¡œ ì§€ì •í•´ì„œ ë”± í•œë²ˆë§Œ
 		GetWorld()->GetTimerManager().SetTimer(ComboTimerHandle, this, &AABCharacterBase::ComboCheck, ComboEffectiveTime ,false);
 	}
 }
@@ -216,14 +216,14 @@ void AABCharacterBase::ComboCheck()
 	{
 		UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
 
-		// ÀÎµ¦½º¸¦ ¹ş¾î³ª¸é ¾ÈµÇ±â ¶§¹®¿¡ ClampingÇÏ±â
+		// ì¸ë±ìŠ¤ë¥¼ ë²—ì–´ë‚˜ë©´ ì•ˆë˜ê¸° ë•Œë¬¸ì— Clampingí•˜ê¸°
 		CurrentCombo = FMath::Clamp(CurrentCombo + 1, 1, ComboActionData->MaxComboCount);
 
-		// ´ÙÀ½ ¼½¼Ç¿¡ ´ëÇÑ ÀÌ¸§ Á¤º¸ °¡Á®¿À±â
+		// ë‹¤ìŒ ì„¹ì…˜ì— ëŒ€í•œ ì´ë¦„ ì •ë³´ ê°€ì ¸ì˜¤ê¸°
 		FName NextSection = *FString::Printf(TEXT("%s%d"), *ComboActionData->MontageSectionNamePrefix, CurrentCombo);
 		AnimInstance->Montage_JumpToSection(NextSection, ComboActionMontage);
 
-		// ¹Ù·Î Å¸ÀÌ¸Ó °É¾îÁà¾ßÇÔ
+		// ë°”ë¡œ íƒ€ì´ë¨¸ ê±¸ì–´ì¤˜ì•¼í•¨
 
 		SetComboCheckTimer();
 		HasNextComboCommand = false;
@@ -233,18 +233,18 @@ void AABCharacterBase::ComboCheck()
 
 void AABCharacterBase::AttackHitCheck()
 {
-	// trace Ã¤³ÎÀ» ÀÌ¿ëÇØ¼­ ¹°Ã¼°¡ ¼­·Î Ãæµ¹µÇ´Â Áö¸¦ °Ë»çÇÏ´Â ·ÎÁ÷
+	// trace ì±„ë„ì„ ì´ìš©í•´ì„œ ë¬¼ì²´ê°€ ì„œë¡œ ì¶©ëŒë˜ëŠ” ì§€ë¥¼ ê²€ì‚¬í•˜ëŠ” ë¡œì§
 
-	// ±¸¸¦ ¸¸µé¾î¼­ ½ÃÀÛ ³¡Á¡À» Á¤ÇØ¼­ Åë°ú½ÃÅ²´Ù.
+	// êµ¬ë¥¼ ë§Œë“¤ì–´ì„œ ì‹œì‘ ëì ì„ ì •í•´ì„œ í†µê³¼ì‹œí‚¨ë‹¤.
 
-	// °á°ú°ªÀ» ¹Ş¾Æ¿À´Â ±¸Á¶Ã¼
+	// ê²°ê³¼ê°’ì„ ë°›ì•„ì˜¤ëŠ” êµ¬ì¡°ì²´
 	FHitResult OutHitResult;
-	// ÀÎÀÚ1. ÅÂ±ë ½Äº°ÀÚ Á¤º¸·Î »ç¿ë, 2º¹ÀâÇÑ ÇüÅÂÀÇ Ãæµ¹Ã¼,3 Á¦¿ÜÇÒ ¿¢ÅÍ
+	// ì¸ì1. íƒœê¹… ì‹ë³„ì ì •ë³´ë¡œ ì‚¬ìš©, 2ë³µì¡í•œ í˜•íƒœì˜ ì¶©ëŒì²´,3 ì œì™¸í•  ì—‘í„°
 	FCollisionQueryParams Params(SCENE_QUERY_STAT(Attack), false, this);
 
 	const float AttackRange = 40.0f;
 	const float AttackRadius = 50.0f;
-	const float AttackDamage = 30.0f;
+	const float AttackDamage = 100.0f;
 
 	const FVector Start = GetActorLocation() + GetActorForwardVector() * GetCapsuleComponent()->GetScaledCapsuleRadius();
 	const FVector End = Start + GetActorForwardVector() * AttackRange;
@@ -253,7 +253,7 @@ void AABCharacterBase::AttackHitCheck()
 
 	if (HitDetected)
 	{
-		// µ¥¹ÌÁö Àü´Ş
+		// ë°ë¯¸ì§€ ì „ë‹¬
 
 		FDamageEvent DamageEvent;
 		OutHitResult.GetActor()->TakeDamage(AttackDamage, DamageEvent, GetController(), this);
@@ -278,24 +278,24 @@ float AABCharacterBase::TakeDamage(float DamageAmount, FDamageEvent const& Damag
 	Super::TakeDamage(DamageAmount, DamageEvent, EventInstigator, DamageCauser);
 
 	
-	// ÇÑ´ë ¸ÂÀ¸¸é Á×À¸´Ï±î ¿©±â¿¡ ÀÓ½Ã·Î Á×´Â ¸ğ¼Ç Àç»ı ÄÚµå ½ÉÀ½.
+	// í•œëŒ€ ë§ìœ¼ë©´ ì£½ìœ¼ë‹ˆê¹Œ ì—¬ê¸°ì— ì„ì‹œë¡œ ì£½ëŠ” ëª¨ì…˜ ì¬ìƒ ì½”ë“œ ì‹¬ìŒ.
 
 	Stat->ApplyDamage(DamageAmount);
 
-	// Actor°¡ ÃÖÁ¾ÀûÀ¸·Î ¹Ş´Â µ¥¹ÌÁö¾ç
+	// Actorê°€ ìµœì¢…ì ìœ¼ë¡œ ë°›ëŠ” ë°ë¯¸ì§€ì–‘
 	return DamageAmount;
 }
 
 void AABCharacterBase::SetDead()
 {
-	// Á×À¸¸é ÀÌµ¿±â´ÉºÎÅÍ Á¦ÇÑ
+	// ì£½ìœ¼ë©´ ì´ë™ê¸°ëŠ¥ë¶€í„° ì œí•œ
 
 	GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_None);
 
-	// Àç»ı
+	// ì¬ìƒ
 	PlayDeadAnimation();
 
-	// Collision ±â´É ´Ù ²¨ÁÖ±â
+	// Collision ê¸°ëŠ¥ ë‹¤ êº¼ì£¼ê¸°
 	SetActorEnableCollision(false);
 
 	HpBar->SetHiddenInGame(true);
@@ -306,7 +306,7 @@ void AABCharacterBase::PlayDeadAnimation()
 	
 	UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
 
-	// Àç»ıÇÏ°í ÀÖ´Â ¸ğµç ¸ùÅ¸ÁÖ ÁßÁö
+	// ì¬ìƒí•˜ê³  ìˆëŠ” ëª¨ë“  ëª½íƒ€ì£¼ ì¤‘ì§€
 	AnimInstance->StopAllMontages(0.0f);
 
 	AnimInstance->Montage_Play(DeadMontage, 1.0f);

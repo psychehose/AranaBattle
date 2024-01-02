@@ -59,15 +59,15 @@ protected:
 
 	void ProcessComboCommand();
 
-	// ¸ùÅ¸ÁÖ°¡ ½ÃÀÛµÉ ‹š È£Ãâ
+	// ëª½íƒ€ì£¼ê°€ ì‹œì‘ë  ë–„ í˜¸ì¶œ
 	void ComboActionBegin();
-	// Á¾·áµÉ ¶§ È£Ãâ - ¸ùÅ¸ÁÖ¿¡ ¼³Á¤µÈ µ¨¸®°ÔÀÌÆ®¸¦ ÅëÇØ¼­ ¹Ù·Î È£ÃâµÇµµ·Ï ÆÄ¶ó¹ÌÅÍ ³ÖÀ½
+	// ì¢…ë£Œë  ë•Œ í˜¸ì¶œ - ëª½íƒ€ì£¼ì— ì„¤ì •ëœ ë¸ë¦¬ê²Œì´íŠ¸ë¥¼ í†µí•´ì„œ ë°”ë¡œ í˜¸ì¶œë˜ë„ë¡ íŒŒë¼ë¯¸í„° ë„£ìŒ
 	void ComboActionEnd(class UAnimMontage* TargetMontage, bool IsProperlyEnded);
 	void SetComboCheckTimer();
 	void ComboCheck();
 	
 	int32 CurrentCombo = 0;
-	// ¿ùµå¿¡¼­ Á¦°øÇÏ´Â ±â´É -> Æ¯Á¤½Ã°£¿¡ ÇÔ¼ö È£Ãâ °¡´É
+	// ì›”ë“œì—ì„œ ì œê³µí•˜ëŠ” ê¸°ëŠ¥ -> íŠ¹ì •ì‹œê°„ì— í•¨ìˆ˜ í˜¸ì¶œ ê°€ëŠ¥
 	FTimerHandle ComboTimerHandle;
 	bool HasNextComboCommand = false;
 
@@ -107,7 +107,7 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Equiment, Meta = (AllowPrivateAccess = "true"))
 	TObjectPtr<class USkeletalMeshComponent> Weapon;
 
-	// 3°³ÀÇ ¾×¼ÇÀÌ ¹ÙÀÎµù µÉ °Í
+	// 3ê°œì˜ ì•¡ì…˜ì´ ë°”ì¸ë”© ë  ê²ƒ
 	UPROPERTY()
 	TArray<FTakeItemDelegateWrapper> TakeItemActions;
 	
