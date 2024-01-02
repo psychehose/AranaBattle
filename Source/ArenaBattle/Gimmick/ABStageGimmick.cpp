@@ -75,11 +75,12 @@ void AABStageGimmick::OnConstruction(const FTransform& Transform)
 
 void AABStageGimmick::OnStageTriggerBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepHitResult)
 {
-	
+	SetState(EStageState::FIGHT);
 }
 
 void AABStageGimmick::OnGateTriggerBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepHitResult)
 {
+	
 }
 
 void AABStageGimmick::OpenAllGates()
@@ -158,7 +159,7 @@ void AABStageGimmick::SetChooseNext()
 
 void AABStageGimmick::OnOpponentDestroyed(AActor* DestroyedActor)
 {
-	
+	SetState(EStageState::REWARD);
 }
 
 void AABStageGimmick::OnOpponentSpawn()
