@@ -4,5 +4,4 @@ DerivedDataCache/*
 Binaries/*
 .vs/*
 *.vsconfig
-*.sln
 *.idea/*
