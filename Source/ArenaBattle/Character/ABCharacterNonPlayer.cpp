@@ -2,31 +2,36 @@
 
 
 #include "Character/ABCharacterNonPlayer.h"
+#include "AI/ABAIController.h"
 #include "Engine/AssetManager.h"
+
 
 AABCharacterNonPlayer::AABCharacterNonPlayer()
 {
 	GetMesh()->SetHiddenInGame(true);
+	
+	AIControllerClass = AABAIController::StaticClass();
+	AutoPossessAI = EAutoPossessAI::PlacedInWorldOrSpawned;
 }
 
 void AABCharacterNonPlayer::PostInitializeComponents()
 {
 	Super::PostInitializeComponents();
 
-	ensure(NPCMeshs.Num() > 0);
-	int32 RandIndex = FMath::RandRange(0, NPCMeshs.Num() - 1);
-	NPCMeshHandle = UAssetManager::Get().GetStreamableManager().RequestAsyncLoad(NPCMeshs[RandIndex], FStreamableDelegate::CreateUObject(this, &AABCharacterNonPlayer::NPCMeshLoadCompleted));
+	ensure(NPCMeshes.Num() > 0);
+	int32 RandIndex = FMath::RandRange(0, NPCMeshes.Num() - 1);
+	NPCMeshHandle = UAssetManager::Get().GetStreamableManager().RequestAsyncLoad(NPCMeshes[RandIndex], FStreamableDelegate::CreateUObject(this, &AABCharacterNonPlayer::NPCMeshLoadCompleted));
 }
 
 void AABCharacterNonPlayer::SetDead()
 {
 	Super::SetDead();
 
-	// 5ÃÊ¸¦ Àç¾ßÇÏ´Âµ¥, ÀÌ°ÍÀº ¿ùµåÀÇ Å¸ÀÓ¼­ºñ½º¸¦ ÀÌ¿ëÇÏÀÚ
+	// 5ï¿½Ê¸ï¿½ ï¿½ï¿½ï¿½ï¿½Ï´Âµï¿½, ï¿½Ì°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½Ó¼ï¿½ï¿½ñ½º¸ï¿½ ï¿½Ì¿ï¿½ï¿½ï¿½ï¿½ï¿½
 
 	FTimerHandle DeadTimerHandle;
 	GetWorld()->GetTimerManager().SetTimer(DeadTimerHandle, FTimerDelegate::CreateLambda(
-		// ¶÷´Ù
+		// ï¿½ï¿½ï¿½ï¿½
 		[&]()
 		{
 			Destroy();

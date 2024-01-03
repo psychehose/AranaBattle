@@ -23,10 +23,10 @@ protected:
 	void SetDead() override;
 	void NPCMeshLoadCompleted();
 
-	UPROPERTY(config) // config¸¦ ÅëÇØ ÁÖ¼Ò°ªÀ» °¡Á®¿Ã °ÍÀÓ ÁÖ¼Ò°ªÀÌ±â ´ë¹®¿¡ FSoftObjectPtr »ç¿ë.
-	TArray<FSoftObjectPath> NPCMeshs;
+	UPROPERTY(config) // configï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¼Ò°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¼Ò°ï¿½ï¿½Ì±ï¿½ ï¿½ë¹®ï¿½ï¿½ FSoftObjectPtr ï¿½ï¿½ï¿½.
+	TArray<FSoftObjectPath> NPCMeshes;
 	
-	// ºñµ¿±â·Î ·Îµù -> FStreamableHandle¸¦ ÅëÇØ¼­
+	// ï¿½ñµ¿±ï¿½ï¿½ ï¿½Îµï¿½ -> FStreamableHandleï¿½ï¿½ ï¿½ï¿½ï¿½Ø¼ï¿½
 	TSharedPtr<FStreamableHandle> NPCMeshHandle;
 
 };
