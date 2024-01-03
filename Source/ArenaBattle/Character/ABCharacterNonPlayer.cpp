@@ -2,10 +2,20 @@
 
 
 #include "Character/ABCharacterNonPlayer.h"
+#include "Engine/AssetManager.h"
 
 AABCharacterNonPlayer::AABCharacterNonPlayer()
 {
-	
+	GetMesh()->SetHiddenInGame(true);
+}
+
+void AABCharacterNonPlayer::PostInitializeComponents()
+{
+	Super::PostInitializeComponents();
+
+	ensure(NPCMeshs.Num() > 0);
+	int32 RandIndex = FMath::RandRange(0, NPCMeshs.Num() - 1);
+	NPCMeshHandle = UAssetManager::Get().GetStreamableManager().RequestAsyncLoad(NPCMeshs[RandIndex], FStreamableDelegate::CreateUObject(this, &AABCharacterNonPlayer::NPCMeshLoadCompleted));
 }
 
 void AABCharacterNonPlayer::SetDead()
@@ -23,4 +33,19 @@ void AABCharacterNonPlayer::SetDead()
 		}
 	), DeadEventDelayTime, false);
 	
+}
+
+void AABCharacterNonPlayer::NPCMeshLoadCompleted()
+{
+	if (NPCMeshHandle.IsValid())
+	{
+		USkeletalMesh* NPCMesh = Cast<USkeletalMesh>(NPCMeshHandle->GetLoadedAsset());
+		if (NPCMesh)
+		{
+			GetMesh()->SetSkeletalMesh(NPCMesh);
+			GetMesh()->SetHiddenInGame(false);
+		}
+	}
+
+	NPCMeshHandle->ReleaseHandle();
 }
