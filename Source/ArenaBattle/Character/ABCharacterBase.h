@@ -63,6 +63,9 @@ protected:
 	void ComboActionBegin();
 	// 종료될 때 호출 - 몽타주에 설정된 델리게이트를 통해서 바로 호출되도록 파라미터 넣음
 	void ComboActionEnd(class UAnimMontage* TargetMontage, bool IsProperlyEnded);
+
+	virtual void NotifyComboActionEnd();
+
 	void SetComboCheckTimer();
 	void ComboCheck();
 	
