@@ -73,7 +73,7 @@ float AABCharacterNonPlayer::GetAIAttackRange()
 
 float AABCharacterNonPlayer::GetAITurnSpeed()
 {
-	return 0.0f;
+	return 2.0f;
 }
 
 void AABCharacterNonPlayer::SetAIAttackDelegate(FAICharacterAttackFinished& InOnAttackFinished)
