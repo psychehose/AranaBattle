@@ -127,6 +127,7 @@ void AABCharacterBase::PostInitializeComponents()
 	Super::PostInitializeComponents();
 
 	Stat->OnHpZero.AddUObject(this, &AABCharacterBase::SetDead);
+	Stat->OnStatChanged.AddUObject(this, &AABCharacterBase::ApplyStat);
 
 }
 
@@ -369,5 +370,11 @@ int32 AABCharacterBase::GetLevel()
 void AABCharacterBase::SetLevel(int32 InNewLevel)
 {
 	Stat->SetLevelStat(InNewLevel);
+}
+
+void AABCharacterBase::ApplyStat(const FABCharacterStat& BastStat, const FABCharacterStat& ModifierStat)
+{
+	float MovementSpeed = (BastStat + ModifierStat).MovementSpeed;
+	GetCharacterMovement()->MaxWalkSpeed = MovementSpeed;
 }
 

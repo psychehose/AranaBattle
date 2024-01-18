@@ -23,6 +23,8 @@ protected:
 	// 입력 맵핑 컨텍스트를 할당하는 역할을 할 것
 	virtual void BeginPlay() override;
 
+	virtual void SetDead() override;
+
 public:
 	// 입력 액션과 Move, Look 함수와 맵핑
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;

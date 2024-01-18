@@ -4,21 +4,19 @@
 
 #include "CoreMinimal.h"
 #include "Item/ABItemData.h"
-#include "GameData/ABCharacterStat.h"
-#include "ABWeaponItemData.generated.h"
+#include "ABPotionItemData.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class ARENABATTLE_API UABWeaponItemData : public UABItemData
+class ARENABATTLE_API UABPotionItemData : public UABItemData
 {
 	GENERATED_BODY()
 
 public:
 
-	UABWeaponItemData();
-
+	UABPotionItemData();
 
 	FPrimaryAssetId GetPrimaryAssetId() const override
 	{
@@ -26,10 +24,7 @@ public:
 	}
 
 public:
-	UPROPERTY(EditAnywhere, Category = Weapon)
-	TSoftObjectPtr<USkeletalMesh> WeaponMesh;
-
-	UPROPERTY(EditAnywhere, Category = Stat)
-	FABCharacterStat ModifierStat;
+	UPROPERTY(EditAnywhere, Category = HP)
+	float HealAmount;
 	
 };
