@@ -34,6 +34,7 @@ public:
 
 	void SetLevelStat(int32 InNewLevel);
 	FORCEINLINE float GetCurrentLevel() const { return CurrentLevel; }
+	FORCEINLINE void AddBaseStat(const FABCharacterStat& InAddBaseStat) { BaseStat = BaseStat + InAddBaseStat; OnStatChanged.Broadcast(BaseStat, ModifierStat); }
 
 	FORCEINLINE void SetBaseStat(const FABCharacterStat& InBaseStat) { BaseStat = InBaseStat; OnStatChanged.Broadcast(BaseStat, ModifierStat); }
 	FORCEINLINE void SetModifierStat(const FABCharacterStat& InModifierStat) { ModifierStat = InModifierStat; OnStatChanged.Broadcast(BaseStat, ModifierStat); }
@@ -43,6 +44,7 @@ public:
 	FORCEINLINE const FABCharacterStat& GetModiferStat() const { return ModifierStat; }
 	FORCEINLINE FABCharacterStat GetTotalStat() const { return BaseStat + ModifierStat; }
 	FORCEINLINE float GetCurrentHp() { return CurrentHp; }
+	FORCEINLINE void HealHp(float InHealAmount) { CurrentHp = FMath::Clamp(CurrentHp + InHealAmount, 0, GetTotalStat().MaxHp);OnHpChanged.Broadcast(CurrentHp); }
 	FORCEINLINE float GetAttackRadius() { return AttackRadius; }
 
 	float ApplyDamage(float InDamage);

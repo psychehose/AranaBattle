@@ -14,8 +14,7 @@ void UABHUDWidget::UpdateStat(const FABCharacterStat& BaseStat, const FABCharact
 {
 
 	FABCharacterStat TotalStat = BaseStat + ModifierStat;
-	HpBar->SetMaxHp(TotalStat.MaxHp);
-
+	HpBar->UpdateStat(BaseStat, ModifierStat);
 	CharacterStat->UpdateStat(BaseStat, ModifierStat);
 
 }
